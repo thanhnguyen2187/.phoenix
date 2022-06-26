@@ -10,6 +10,7 @@ Make sure that this repository is ready within the machine and move to the
 cloned folder:
 
 ```sh
+cd ~
 git clone https://github.com/thanhnguyen2187/.phoenix
 cd ~/.phoenix
 ```
@@ -29,9 +30,12 @@ git checkout home
 
 ## Branches
 
-- `home`: for personal usage
+- `master`: for documentation writing
+- `home`: for home usage
 - `work`: for work usage
 - `?`
+
+TODO: use cool branch names like `dominus`, `draco`, and `avem`
 
 ## Notes
 
