@@ -1,8 +1,8 @@
 # Phoenix
 
 Personal declarative configuration files that shall rise from the ashes. An
-Ubuntu/Debian-based distro with `apt` is expected. Some other shell scripts that
-I want to store also go here.
+Ubuntu/Debian-based distro with `apt` is expected. Other shell scripts that I
+want to store also go here.
 
 ## Bootstrap
 
@@ -12,7 +12,7 @@ cloned folder:
 ```sh
 cd ~
 git clone https://github.com/thanhnguyen2187/.phoenix
-cd ~/.phoenix
+cd .phoenix/
 ```
 
 Run the bootstrap file to install `nix`, and `home-manager`:
@@ -21,21 +21,26 @@ Run the bootstrap file to install `nix`, and `home-manager`:
 ./bootstrap.sh
 ```
 
-Switch to the correct branch to get the right configuration:
+Create a link to a config file:
 
-```sh
-git checkout home
-# git checkout work
+```
+./link.sh draco
+
+# equivalent to:
+# ln -s ~/.phoenix/configs/draco.nix ~/.config/nixpkgs/home.nix
 ```
 
-## Branches
+Run `home-manager`:
 
-- `master`: for documentation writing
-- `home`: for home usage
-- `work`: for work usage
+```
+home-manager switch
+```
+
+## Config Files
+
+- `draco`: for home/personal usage
+- `avem`: for work usage
 - `?`
-
-TODO: use cool branch names like `dominus`, `draco`, and `avem`
 
 ## Notes
 
