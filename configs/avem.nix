@@ -23,6 +23,12 @@
     google-cloud-sdk
     cloud-sql-proxy
     gitui
+    jq
+    graphviz
+    docker-compose
+    htop
+    kubectl
+    redli
   ];
   imports = [
     ./vim.nix
@@ -44,10 +50,16 @@
           source $FILE
     '';
     shellAliases = {
-      ".." = "cd ..";
       "cl" = "clear";
-      "ll" = "ls -l";
-      "cll" = "clear && ls -l";
+      "cll" = "clear && ll";
+      "cla" = "clear && la";
+    };
+    oh-my-zsh = {
+      enable = true;
+      # theme = "robbyrussell";
+      plugins = [
+        "kubectl"
+      ];
     };
   };
 
