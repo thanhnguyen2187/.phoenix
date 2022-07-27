@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   scriptVim = ''
     " Essential
@@ -59,7 +59,21 @@ let
     " Vim Slime
     let g:slime_target = "tmux"
     let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+
+    " Easy Align
+    xmap ga <Plug>(EasyAlign)
+    nmap ga <Plug>(EasyAlign)
   '';
+  # https://breuer.dev/blog/nixos-home-manager-neovim
+  customVimPluginGit = ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "${lib.strings.sanitizeDerivationName repo}";
+    version = ref;
+    src = builtins.fetchGit {
+      url = "https://github.com/${repo}.git";
+      ref = ref;
+    };
+  };
+  customVimPluginGitLatest = customVimPluginGit "HEAD";
 in {
   programs.vim = {
     enable = true;
@@ -67,11 +81,17 @@ in {
   };
   programs.neovim = {
     enable = true;
-    extraConfig = builtins.concatStringsSep "\n" [scriptVim scriptNeovim];
+    extraConfig = builtins.concatStringsSep "\n" [
+      scriptVim
+      scriptNeovim
+      ''
+      luafile ${builtins.toString ./nvim/completion.lua}
+      luafile ${builtins.toString ./nvim/lualine.lua}
+      ''
+    ];
 
     plugins = with pkgs.vimPlugins; [
       vim-sexp
-      # vim-sexp-mappings-for-regular-people
       vim-slime
       vim-nix
       vim-commentary
@@ -79,10 +99,17 @@ in {
       vim-repeat
       vim-surround
       vim-ReplaceWithRegister
+      vim-easy-align
       fzf-vim
       auto-pairs
       nord-nvim
       lualine-nvim
+      coq_nvim
+      nvim-lspconfig
+      lua-dev-nvim
+      (customVimPluginGitLatest "ms-jpq/coq.thirdparty")
+      (customVimPluginGitLatest "ms-jpq/coq.artifacts")
+      vim-elixir
     ];
   };
 }

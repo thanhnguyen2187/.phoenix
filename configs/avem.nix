@@ -10,6 +10,12 @@
 
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
+  xdg.configFile = {
+    nvim = {
+      source = ./nvim;
+      recursive = true;
+    }
+  };
   home.packages = with pkgs; [
     xclip
     (nerdfonts.override { fonts = ["JetBrainsMono"]; })
