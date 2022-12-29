@@ -66,7 +66,7 @@ let
   '';
   # https://breuer.dev/blog/nixos-home-manager-neovim
   customVimPluginGit = ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "${lib.strings.sanitizeDerivationName repo}";
+    pname = "${lib.strings.sanitizeDerivationName repo}"; 
     version = ref;
     src = builtins.fetchGit {
       url = "https://github.com/${repo}.git";
@@ -109,7 +109,9 @@ in {
       lua-dev-nvim
       (customVimPluginGitLatest "ms-jpq/coq.thirdparty")
       (customVimPluginGitLatest "ms-jpq/coq.artifacts")
-      vim-elixir
+      (customVimPluginGitLatest "janet-lang/janet.vim")
+      (customVimPluginGitLatest "Olical/conjure")
+      (customVimPluginGitLatest "bakpakin/fennel.vim")
     ];
   };
 }

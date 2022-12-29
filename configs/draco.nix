@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 let
+  # TODO: find a way to make the config more declarative
+  # nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
+  # nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl && nix-channel --update
   pkgsUnstable = import <nixpkgs-unstable> {};
+  # nixGL = import <nixgl> {};
 in
 {
   home.username = "thanh";
@@ -21,11 +25,9 @@ in
     ripgrep
     hugo
     go-task
-    texlive.combined.scheme-small
+    texlive.combined.scheme-full
     nodejs
     yarn
-    google-cloud-sdk
-    cloud-sql-proxy
     gitui
     swiProlog
     vscode
@@ -36,32 +38,21 @@ in
     sumneko-lua-language-server
     elixir_ls
     inotify-tools
+    jq
+    kubectl
+    janet
+    pkgsUnstable.jpm
+    babashka
+    clojure
+    jdk
   ];
   imports = [
     ./vim.nix
+    ./zsh.nix
   ];
 
   programs.fzf = {
     enable = true;
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    enableCompletion = true;
-    enableSyntaxHighlighting = true;
-    initExtra = ''
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      FILE=~/.p10k.zsh && \
-          test -f $FILE && \
-          source $FILE
-    '';
-    shellAliases = {
-      ".." = "cd ..";
-      "cl" = "clear";
-      "ll" = "ls -l";
-      "cll" = "clear && ls -l";
-    };
   };
 
   programs.tmux = {
