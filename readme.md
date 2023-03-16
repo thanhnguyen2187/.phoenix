@@ -46,3 +46,8 @@ home-manager switch
 
 `notes/` tells us why does the code within this repository exist as it is.
 
+## TODO
+
+- [ ] Reorganize this file
+- [ ] Add `flake` command: `home-manager switch --flake .#thanh`
+

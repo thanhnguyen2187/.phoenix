@@ -106,12 +106,12 @@ in {
       lualine-nvim
       coq_nvim
       nvim-lspconfig
-      lua-dev-nvim
-      (customVimPluginGitLatest "ms-jpq/coq.thirdparty")
-      (customVimPluginGitLatest "ms-jpq/coq.artifacts")
-      (customVimPluginGitLatest "janet-lang/janet.vim")
-      (customVimPluginGitLatest "Olical/conjure")
-      (customVimPluginGitLatest "bakpakin/fennel.vim")
+      # neodev-nvim
+      # (customVimPluginGitLatest "ms-jpq/coq.thirdparty")
+      # (customVimPluginGitLatest "ms-jpq/coq.artifacts")
+      # (customVimPluginGitLatest "janet-lang/janet.vim")
+      # (customVimPluginGitLatest "Olical/conjure")
+      # (customVimPluginGitLatest "bakpakin/fennel.vim")
     ];
   };
 }

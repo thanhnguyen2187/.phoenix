@@ -3,14 +3,14 @@ let
   # TODO: find a way to make the config more declarative
   # nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
   # nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl && nix-channel --update
-  pkgsUnstable = import <nixpkgs-unstable> {};
+  # pkgsUnstable = import <nixpkgs-unstable> {};
   # nixGL = import <nixgl> {};
 in
 {
   home.username = "thanh";
   home.homeDirectory = "/home/thanh";
 
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 
   programs.home-manager.enable = true;
 
@@ -25,26 +25,26 @@ in
     ripgrep
     hugo
     go-task
-    texlive.combined.scheme-full
+    # texlive.combined.scheme-full
     nodejs
     yarn
     gitui
-    swiProlog
-    vscode
-    graphviz
-    pkgsUnstable.deno
+    # swiProlog
+    # vscode
+    # graphviz
+    # pkgsUnstable.deno
     go_1_18
-    elixir
-    sumneko-lua-language-server
-    elixir_ls
-    inotify-tools
+    # elixir
+    # sumneko-lua-language-server
+    # elixir_ls
+    # inotify-tools
     jq
-    kubectl
-    janet
-    pkgsUnstable.jpm
-    babashka
-    clojure
-    jdk
+    # kubectl
+    # janet
+    # pkgsUnstable.jpm
+    # babashka
+    # clojure
+    # jdk
   ];
   imports = [
     ./vim.nix

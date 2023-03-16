@@ -40,21 +40,21 @@ end
 local lsp_flags = {
   debounce_text_changes = 150,
 }
-local luadev = require('lua-dev').setup({
-  lspconfig = {
-    on_attach = on_attach,
-    flags = lsp_flags,
-  },
-})
-nvim_lsp.sumneko_lua.setup(
-  coq.lsp_ensure_capabilities(luadev)
-)
+-- local luadev = require('lua-dev').setup({
+--   lspconfig = {
+--     on_attach = on_attach,
+--     flags = lsp_flags,
+--   },
+-- })
+-- nvim_lsp.sumneko_lua.setup(
+--   coq.lsp_ensure_capabilities(luadev)
+-- )
 
 nvim_lsp.elixirls.setup({
   cmd = { "elixir-ls" },
   on_attach = on_attach,
 })
 
-require("coq_3p") {
-  { src = "nvimlua", short_name = "nLUA" },
-}
+-- require("coq_3p") {
+--   { src = "nvimlua", short_name = "nLUA" },
+-- }
