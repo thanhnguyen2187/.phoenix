@@ -58,3 +58,19 @@ nvim_lsp.elixirls.setup({
 -- require("coq_3p") {
 --   { src = "nvimlua", short_name = "nLUA" },
 -- }
+
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = on_attach,
+  },
+})
+
+nvim_lsp.pylsp.setup({
+    on_attach = on_attach,
+})
+
+nvim_lsp.ocamllsp.setup({
+    on_attach = on_attach,
+})
