@@ -14,7 +14,8 @@ in
 
   programs.home-manager.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = (pkg: true);
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     xclip
@@ -25,7 +26,7 @@ in
     ripgrep
     hugo
     go-task
-    # texlive.combined.scheme-full
+    texlive.combined.scheme-full
     nodejs
     yarn
     gitui
@@ -45,6 +46,27 @@ in
     # babashka
     # clojure
     # jdk
+    tmuxp
+    spotify
+
+    # cargo
+    # rustc
+    rustup
+    # TODO: find a way to make this feel... less hacky
+    rust-analyzer
+    # rustfmt
+    # clippy
+
+    gcc
+    calibre
+    sqlitebrowser
+
+    jetbrains.pycharm-community
+    jetbrains.idea-community
+    python3Full
+    python310Packages.python-lsp-server
+
+    gnumake
   ];
   imports = [
     ./vim.nix
@@ -109,5 +131,9 @@ in
         };
       };
     };
+  };
+
+  programs.opam = {
+    enable = true;
   };
 }
