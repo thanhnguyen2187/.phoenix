@@ -1,0 +1,11 @@
+# TODO: find out why is `tmuxp load .` is so damn slow
+session_name: dot-phoenix
+windows:
+  - window_name: editor
+    layout: main-horizontal
+    options:
+      main-pane-height: 32
+    panes:
+      - shell_command: nvim -S
+      - null
+      - null
