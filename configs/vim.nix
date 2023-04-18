@@ -100,12 +100,15 @@ in {
       vim-surround
       vim-ReplaceWithRegister
       vim-easy-align
+      vim-obsession
       fzf-vim
       auto-pairs
       nord-nvim
       lualine-nvim
       coq_nvim
       nvim-lspconfig
+      rust-tools-nvim
+      vim-ocaml
       # neodev-nvim
       # (customVimPluginGitLatest "ms-jpq/coq.thirdparty")
       # (customVimPluginGitLatest "ms-jpq/coq.artifacts")
