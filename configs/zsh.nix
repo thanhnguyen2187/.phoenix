@@ -14,6 +14,7 @@
       export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig"
       export LD_LIBRARY_PATH=${pkgs.openssl.out}/lib
       export DOTNET_ROOT=${pkgs.dotnet-sdk}
+      export PATH=$PATH:${builtins.toString ./shell}
     '';
     shellAliases = {
       "cl" = "clear";

@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+import random
+
+items = [
+    "drink water",
+    "walk outside",
+    "do a stretch",
+    "meditate",
+    "play the guitar",
+    "open the Kindle",
+    "refocus on the task",
+]
+
+picked_item = random.choice(items)
+
+print(picked_item)
