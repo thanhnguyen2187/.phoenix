@@ -34,7 +34,7 @@ in
     # vscode
     # graphviz
     # pkgsUnstable.deno
-    go_1_18
+    go
     # elixir
     # sumneko-lua-language-server
     # elixir_ls
@@ -45,9 +45,13 @@ in
     # pkgsUnstable.jpm
     # babashka
     # clojure
-    # jdk
+    jdk
     tmuxp
     spotify
+    google-chrome
+    peek
+
+    # tree-sitter
 
     # cargo
     # rustc
@@ -56,17 +60,38 @@ in
     rust-analyzer
     # rustfmt
     # clippy
+    # llvmPackages.bintools # to make `lld` works
+    # (clang.override {ignoreCollisions = true;})
 
+    llvm
+    lld
     gcc
+    # llvmPackages.libcxxClang
+    # clang
+    pkgconfig
+    # dotnetPackages.Boogie_2_4_1
+    # boogie
+    dotnet-sdk
+
+    openssl
+    openssl.dev
+    openssl.out
+    # openssl_1_1
+    # openssl_1_1.dev
+
     calibre
     sqlitebrowser
 
     jetbrains.pycharm-community
     jetbrains.idea-community
+    jetbrains.webstorm
+    jetbrains.goland
+
     python3Full
     python310Packages.python-lsp-server
 
     gnumake
+    docker-compose
   ];
   imports = [
     ./vim.nix
