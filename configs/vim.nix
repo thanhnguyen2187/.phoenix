@@ -65,15 +65,14 @@ let
     nmap ga <Plug>(EasyAlign)
   '';
   # https://breuer.dev/blog/nixos-home-manager-neovim
-  customVimPluginGit = ref: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
+  customVimPluginGit = repo: rev: pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "${lib.strings.sanitizeDerivationName repo}"; 
-    version = ref;
+    version = rev;
     src = builtins.fetchGit {
       url = "https://github.com/${repo}.git";
-      ref = ref;
+      rev = rev;
     };
   };
-  customVimPluginGitLatest = customVimPluginGit "HEAD";
 in {
   programs.vim = {
     enable = true;
@@ -109,11 +108,16 @@ in {
       nvim-lspconfig
       rust-tools-nvim
       vim-ocaml
+      (customVimPluginGit "rvmelkonian/move.vim" "d762ef02947cf2f4cebdc6ccbdd90ffcc0c11a1b")
+      # (customVimPluginGit "nvim-treesitter/nvim-treesitter" "f2778bd1a28b74adf5b1aa51aa57da85adfa3d16")
+      nvim-treesitter.withAllGrammars
+      go-nvim
+      # nvim-dap
+      # nvim-dap-go
       # neodev-nvim
       # (customVimPluginGitLatest "ms-jpq/coq.thirdparty")
       # (customVimPluginGitLatest "ms-jpq/coq.artifacts")
       # (customVimPluginGitLatest "janet-lang/janet.vim")
-      # (customVimPluginGitLatest "Olical/conjure")
       # (customVimPluginGitLatest "bakpakin/fennel.vim")
     ];
   };
