@@ -10,7 +10,7 @@ in
   home.username = "thanh";
   home.homeDirectory = "/home/thanh";
 
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   programs.home-manager.enable = true;
 
@@ -28,6 +28,7 @@ in
     go-task
     texlive.combined.scheme-full
     nodejs
+    # nodejs_16
     yarn
     gitui
     # swiProlog
@@ -49,7 +50,9 @@ in
     tmuxp
     spotify
     google-chrome
+    chromedriver
     peek
+    gerbil
 
     # tree-sitter
 
@@ -57,7 +60,7 @@ in
     # rustc
     rustup
     # TODO: find a way to make this feel... less hacky
-    rust-analyzer
+    # rust-analyzer
     # rustfmt
     # clippy
     # llvmPackages.bintools # to make `lld` works
@@ -73,25 +76,30 @@ in
     # boogie
     dotnet-sdk
 
-    openssl
-    openssl.dev
-    openssl.out
-    # openssl_1_1
-    # openssl_1_1.dev
-
     calibre
     sqlitebrowser
 
     jetbrains.pycharm-community
+    jetbrains.pycharm-professional
     jetbrains.idea-community
     jetbrains.webstorm
     jetbrains.goland
 
     python3Full
     python310Packages.python-lsp-server
+    # pipenv
 
     gnumake
     docker-compose
+
+    openssl
+    glib
+    nss
+    nspr
+    xorg.libxcb
+
+    patchelf
+    # solc
   ];
   imports = [
     ./vim.nix
