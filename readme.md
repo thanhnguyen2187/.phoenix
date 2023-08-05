@@ -1,46 +1,22 @@
 # Phoenix
 
-Personal declarative configuration files that shall rise from the ashes. An
-Ubuntu/Debian-based distro with `apt` is expected. Other shell scripts that I
-want to store also go here.
+Personal declarative configuration files that shall rise from the ashes.
 
-## Bootstrap
+## Getting Started
 
-Make sure that this repository is ready within the machine and move to the
-cloned folder:
+Make sure that NixOS is installed on the machine.
 
-```sh
-cd ~
-git clone https://github.com/thanhnguyen2187/.phoenix
-cd .phoenix/
+To apply NixOS operating system configuration:
+
+```shell
+sudo nixos-rebuild switch --flake .#thanh --impure
 ```
 
-Run the bootstrap file to install `nix`, and `home-manager`:
+To apply Home Manager configuration:
 
-```sh
-./bootstrap.sh
+```shell
+home-manager switch --flake .#thanh
 ```
-
-Create a link to a config file:
-
-```
-./link.sh draco
-
-# equivalent to:
-# ln -s ~/.phoenix/configs/draco.nix ~/.config/nixpkgs/home.nix
-```
-
-Run `home-manager`:
-
-```
-home-manager switch
-```
-
-## Config Files
-
-- `draco`: for home/personal usage
-- `avem`: for work usage
-- `?`
 
 ## Notes
 
@@ -48,6 +24,5 @@ home-manager switch
 
 ## TODO
 
-- [ ] Reorganize this file
-- [ ] Add `flake` command: `home-manager switch --flake .#thanh`
+- [ ] Investigate why `--impure` is needed
 
