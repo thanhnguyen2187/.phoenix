@@ -19,6 +19,8 @@
       ];
     };
     nixosConfigurations.thanh = nixpkgs.lib.nixosSystem {
+      # inherit pkgs system;
+      system = "x86_64-linux";
       modules = [
         ./configs/draco-ossis.nix
       ];
