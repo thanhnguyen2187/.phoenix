@@ -84,6 +84,7 @@ in
     jetbrains.idea-community
     jetbrains.webstorm
     jetbrains.goland
+    jetbrains.datagrip
 
     python3Full
     python310Packages.python-lsp-server
@@ -99,7 +100,11 @@ in
     xorg.libxcb
 
     patchelf
+    cmake
     # solc
+    vivaldi
+    skypeforlinux
+    postgresql
   ];
   imports = [
     ./vim.nix
