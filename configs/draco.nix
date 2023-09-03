@@ -117,17 +117,10 @@ in
 
   programs.tmux = {
     enable = true;
-    terminal = "screen-256color";
-    keyMode = "vi";
-    customPaneNavigationAndResize = true;
-    plugins = with pkgs.tmuxPlugins; [
-      yank
-      nord
-    ];
-    resizeAmount = 2;
+    # use `gpakosz/.tmux`
     extraConfig = ''
-      bind -r C-h previous-window
-      bind -r C-l next-window
+      ${builtins.readFile ./tmux/.tmux.conf}
+      ${builtins.readFile ./tmux/.tmux.conf.local}
     '';
   };
 
