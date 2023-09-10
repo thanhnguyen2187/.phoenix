@@ -9,13 +9,29 @@ Make sure that NixOS is installed on the machine.
 To apply NixOS operating system configuration:
 
 ```shell
-sudo nixos-rebuild switch --flake .#thanh --impure
+sudo nixos-rebuild switch --flake .#<name> --impure
 ```
 
 To apply Home Manager configuration:
 
 ```shell
-home-manager switch --flake .#thanh
+home-manager switch --flake .#<name>
+```
+
+## Configuration Sets
+
+- `draco`: for home PC
+
+```shell
+sudo nixos-rebuild switch --flake .#draco --impure
+home-manager switch --flake .#draco
+```
+
+- `vespertilio`: for P53
+
+```shell
+sudo nixos-rebuild switch --flake .#vespertilio --impure
+home-manager switch --flake .#vespertilio
 ```
 
 ## Notes
