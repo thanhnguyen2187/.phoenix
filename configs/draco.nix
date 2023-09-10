@@ -1,10 +1,5 @@
 { config, pkgs, ... }:
 let
-  # TODO: find a way to make the config more declarative
-  # nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
-  # nix-channel --add https://github.com/guibou/nixGL/archive/main.tar.gz nixgl && nix-channel --update
-  # pkgsUnstable = import <nixpkgs-unstable> {};
-  # nixGL = import <nixgl> {};
 in
 {
   home.username = "thanh";
