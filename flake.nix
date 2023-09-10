@@ -1,5 +1,5 @@
 {
-  description = "My Home Manager configuration";
+  description = "Personal declarative configuration files that shall rise from the ashes";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     home-manager = {
@@ -12,14 +12,26 @@
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
-    homeConfigurations.thanh = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations.draco = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [
         ./configs/draco.nix
       ];
     };
-    nixosConfigurations.thanh = nixpkgs.lib.nixosSystem {
-      # inherit pkgs system;
+    nixosConfigurations.draco = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./configs/draco-ossis.nix
+      ];
+    };
+
+    homeConfigurations.vespertilio = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [
+        ./configs/vespertilio.nix
+      ];
+    };
+    nixosConfigurations.vespertilio = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./configs/draco-ossis.nix
