@@ -1,0 +1,13 @@
+set ideajoin
+set surround
+set exchange
+set commentary
+set ReplaceWithRegister
+set textobj-indent
+
+set nu
+set rnu
+set so=999
+
+set visualbell
+set noerrorbells

@@ -137,4 +137,6 @@ in
   programs.opam = {
     enable = true;
   };
+
+  home.file.".ideavimrc".text = builtins.readFile ./vim/.ideavimrc;
 }
