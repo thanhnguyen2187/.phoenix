@@ -59,6 +59,10 @@ let
     " Vim Slime
     let g:slime_target = "tmux"
     let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+    let g:slime_dont_ask_default = 1
+    autocmd FileType markdown let g:slime_cell_delimiter = "```"
+    autocmd FileType scheme let g:slime_cell_delimiter = ";;;"
+    nmap <c-c><c-s> <Plug>SlimeSendCell
 
     " Easy Align
     xmap ga <Plug>(EasyAlign)
@@ -86,6 +90,7 @@ in {
       ''
       luafile ${builtins.toString ./nvim/completion.lua}
       luafile ${builtins.toString ./nvim/lualine.lua}
+      luafile ${builtins.toString ./nvim/firenvim.lua}
       ''
     ];
 
@@ -112,6 +117,11 @@ in {
       # (customVimPluginGit "nvim-treesitter/nvim-treesitter" "f2778bd1a28b74adf5b1aa51aa57da85adfa3d16")
       nvim-treesitter.withAllGrammars
       go-nvim
+      firenvim
+      # Run this afterwards
+      #
+      #   nvim --headless "+call firenvim#install(0) | q"
+
       # nvim-dap
       # nvim-dap-go
       # neodev-nvim
