@@ -99,7 +99,7 @@ in
     # solc
     vivaldi
     skypeforlinux
-    postgresql
+    # postgresql
   ];
   imports = [
     ./vim.nix
