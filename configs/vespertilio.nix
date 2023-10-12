@@ -138,5 +138,9 @@ in
     enable = true;
   };
 
+  services.flameshot = {
+    enable = true;
+  };
+
   home.file.".ideavimrc".text = builtins.readFile ./vim/.ideavimrc;
 }
