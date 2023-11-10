@@ -41,7 +41,7 @@ in
     # pkgsUnstable.jpm
     # babashka
     # clojure
-    jdk
+    jdk17
     tmuxp
     spotify
     google-chrome
@@ -93,6 +93,7 @@ in
     nss
     nspr
     xorg.libxcb
+    xorg.libXtst
 
     patchelf
     cmake
@@ -100,6 +101,8 @@ in
     vivaldi
     skypeforlinux
     # postgresql
+    zotero
+    sqlite
   ];
   imports = [
     ./vim.nix
@@ -162,4 +165,10 @@ in
   programs.opam = {
     enable = true;
   };
+
+  services.flameshot = {
+    enable = true;
+  };
+  
+  home.file.".ideavimrc".text = builtins.readFile ./vim/.ideavimrc;
 }
