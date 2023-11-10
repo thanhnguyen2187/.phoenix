@@ -84,6 +84,7 @@ in {
   };
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
     extraConfig = builtins.concatStringsSep "\n" [
       scriptVim
       scriptNeovim
