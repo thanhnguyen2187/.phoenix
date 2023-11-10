@@ -11,3 +11,6 @@ set so=999
 
 set visualbell
 set noerrorbells
+
+map <c-k> <Action>(ShowErrorDescription)
+
