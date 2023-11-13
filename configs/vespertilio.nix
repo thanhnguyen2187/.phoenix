@@ -93,7 +93,8 @@ in
     cmake
     vivaldi
     skypeforlinux
-    postgresql
+    # postgresql
+    zotero
   ];
   imports = [
     ./vim.nix

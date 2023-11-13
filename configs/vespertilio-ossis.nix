@@ -21,10 +21,10 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.extraModulePackages = [
-    config.boot.kernelPackages.rtl88x2bu
+    # config.boot.kernelPackages.rtl88x2bu
   ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "vespertilio"; # Define your hostname.
   networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Ho_Chi_Minh";
@@ -53,6 +53,14 @@ in
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    # package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;

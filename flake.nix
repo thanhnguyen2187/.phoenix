@@ -34,7 +34,7 @@
     nixosConfigurations.vespertilio = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configs/draco-ossis.nix
+        ./configs/vespertilio-ossis.nix
       ];
     };
   };
