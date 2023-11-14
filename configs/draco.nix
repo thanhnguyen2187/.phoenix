@@ -4,7 +4,6 @@ in
 {
   home.username = "thanh";
   home.homeDirectory = "/home/thanh";
-
   home.stateVersion = "23.05";
 
   programs.home-manager.enable = true;
@@ -103,6 +102,7 @@ in
     # postgresql
     zotero
     sqlite
+    warpd
   ];
   imports = [
     ./vim.nix
@@ -169,6 +169,6 @@ in
   services.flameshot = {
     enable = true;
   };
-  
+
   home.file.".ideavimrc".text = builtins.readFile ./vim/.ideavimrc;
 }
