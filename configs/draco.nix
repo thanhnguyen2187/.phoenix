@@ -103,6 +103,7 @@ in
     zotero
     sqlite
     warpd
+    wally-cli
   ];
   imports = [
     ./vim.nix
