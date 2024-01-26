@@ -5,12 +5,12 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
-    sha256 = "0dfshsgj93ikfkcihf4c5z876h4dwjds998kvgv7sqbfv0z6a4bc";
+    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+    sha256 = "0x7lvvzi0lv7yvp97s0lkdiapxxpwqz8a86w2lk0dm14y1az23aq";
   };
   nix-alien-pkgs = import (builtins.fetchTarball {
     url = "https://github.com/thiagokokada/nix-alien/tarball/master";
-    sha256 = "1w74jlw09b3gd5bbvyb1np521c2v6f6x3rqld91hdd4dq8x7693j";
+    sha256 = "1pibz7la81s9ijyq7m3zv830waw1k6km227gab580086kl8kcpmm";
   }) { };
 in
 {
@@ -167,6 +167,6 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
 }

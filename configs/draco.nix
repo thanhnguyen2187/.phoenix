@@ -4,7 +4,7 @@ in
 {
   home.username = "thanh";
   home.homeDirectory = "/home/thanh";
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 
   programs.home-manager.enable = true;
 
@@ -20,90 +20,37 @@ in
     ripgrep
     hugo
     go-task
-    texlive.combined.scheme-full
     nodejs
-    # nodejs_16
     yarn
     gitui
-    # swiProlog
-    # vscode
-    # graphviz
-    # pkgsUnstable.deno
     go
-    # elixir
-    # sumneko-lua-language-server
-    # elixir_ls
-    # inotify-tools
     jq
-    # kubectl
-    # janet
-    # pkgsUnstable.jpm
-    # babashka
-    # clojure
-    jdk17
     tmuxp
     spotify
     google-chrome
     chromedriver
     peek
-    gerbil
-
-    # tree-sitter
-
-    # cargo
-    # rustc
     rustup
-    # TODO: find a way to make this feel... less hacky
-    # rust-analyzer
-    # rustfmt
-    # clippy
-    # llvmPackages.bintools # to make `lld` works
-    # (clang.override {ignoreCollisions = true;})
-
-    llvm
-    lld
-    gcc
-    # llvmPackages.libcxxClang
-    # clang
-    pkgconfig
-    # dotnetPackages.Boogie_2_4_1
-    # boogie
-    dotnet-sdk
-
     calibre
     sqlitebrowser
-
     jetbrains.pycharm-community
     jetbrains.pycharm-professional
     jetbrains.idea-community
     jetbrains.webstorm
     jetbrains.goland
     jetbrains.datagrip
-
     python3Full
-    python310Packages.python-lsp-server
-    # pipenv
-
     gnumake
     docker-compose
-
-    openssl
-    glib
-    nss
-    nspr
-    xorg.libxcb
-    xorg.libXtst
-
-    patchelf
-    cmake
-    # solc
     vivaldi
     skypeforlinux
-    # postgresql
     zotero
     sqlite
     warpd
     wally-cli
+    (texliveSmall.withPackages (ps: with ps; [
+      fullpage
+    ]))
   ];
   imports = [
     ./vim.nix
