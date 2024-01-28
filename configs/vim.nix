@@ -119,6 +119,7 @@ in {
       nvim-treesitter.withAllGrammars
       go-nvim
       firenvim
+      typst-vim
       # Run this afterwards
       #
       #   nvim --headless "+call firenvim#install(0) | q"

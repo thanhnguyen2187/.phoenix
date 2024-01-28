@@ -48,9 +48,7 @@ in
     sqlite
     warpd
     wally-cli
-    (texliveSmall.withPackages (ps: with ps; [
-      fullpage
-    ]))
+    typst
   ];
   imports = [
     ./vim.nix
