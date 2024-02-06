@@ -81,3 +81,9 @@ nvim_lsp.gopls.setup({
 
 require("go").setup()
 -- require("dap-go").setup()
+
+-- vim.g.codeium_render = false
+
+-- require("coq_3p") {
+--     { src = "codeium", short_name = "COD" }
+-- }

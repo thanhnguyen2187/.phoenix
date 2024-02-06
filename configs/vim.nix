@@ -111,6 +111,7 @@ in {
       nord-nvim
       lualine-nvim
       coq_nvim
+      # coq-thirdparty
       nvim-lspconfig
       rust-tools-nvim
       vim-ocaml
@@ -120,6 +121,7 @@ in {
       go-nvim
       firenvim
       typst-vim
+      # codeium-vim
       # Run this afterwards
       #
       #   nvim --headless "+call firenvim#install(0) | q"
