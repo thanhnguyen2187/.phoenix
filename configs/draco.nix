@@ -49,6 +49,7 @@ in
     warpd
     wally-cli
     typst
+    codeium
   ];
   imports = [
     ./vim.nix
