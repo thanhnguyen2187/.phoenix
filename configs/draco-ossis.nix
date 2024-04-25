@@ -10,7 +10,7 @@ let
   };
   nix-alien-pkgs = import (builtins.fetchTarball {
     url = "https://github.com/thiagokokada/nix-alien/tarball/master";
-    sha256 = "1pibz7la81s9ijyq7m3zv830waw1k6km227gab580086kl8kcpmm";
+    sha256 = "1hi8gynzdxgfd0fbxvhyn4fakrnz4v60ap27l35xz646mbkhfzg9";
   }) { };
 in
 {
@@ -156,7 +156,7 @@ in
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 5173 5174 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
