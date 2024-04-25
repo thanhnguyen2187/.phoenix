@@ -133,6 +133,7 @@ in {
       # (customVimPluginGitLatest "ms-jpq/coq.artifacts")
       # (customVimPluginGitLatest "janet-lang/janet.vim")
       # (customVimPluginGitLatest "bakpakin/fennel.vim")
+      (customVimPluginGit "hwayne/tla.vim")
     ];
   };
 }
