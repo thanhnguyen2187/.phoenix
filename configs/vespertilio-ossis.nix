@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
-    sha256 = "1lhkqlizabh107mgj9b3fsfzz6cwpcmplkwspqqavwqr9dlmlwc4";
+    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+    sha256 = "0562y8awclss9k4wk3l4akw0bymns14sfy2q9n23j27m68ywpdkh";
   };
   nix-alien-pkgs = import (builtins.fetchTarball {
     url = "https://github.com/thiagokokada/nix-alien/tarball/master";
@@ -114,6 +114,6 @@ in
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 
 }
