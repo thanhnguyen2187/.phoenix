@@ -69,7 +69,7 @@ let
     nmap ga <Plug>(EasyAlign)
   '';
   # https://breuer.dev/blog/nixos-home-manager-neovim
-  customVimPluginGit = repo: rev: pkgs.vimUtils.buildVimPluginFrom2Nix {
+  customVimPluginGit = repo: rev: pkgs.vimUtils.buildVimPlugin {
     pname = "${lib.strings.sanitizeDerivationName repo}"; 
     version = rev;
     src = builtins.fetchGit {

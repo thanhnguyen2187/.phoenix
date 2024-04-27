@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 let
+  unstablePkgs = import (builtins.fetchTarball {
+    url = "https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable";
+    sha256 = "sha256:1lxnwjs0fi9sx3vrk0kkpysfb64kp7gmy3gk9xdkzaaq9zmm1jgn";
+  })
+  { config = config.nixpkgs.config; system = "x86_64-linux"; };
 in
 {
   home.username = "thanh";
@@ -55,6 +60,7 @@ in
     deluge
     csvkit
     sqld
+    unstablePkgs.awscli2
   ];
   imports = [
     ./vim.nix
