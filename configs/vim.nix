@@ -97,7 +97,7 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       vim-sexp
-      vim-slime
+      (customVimPluginGit "vim-slime" "d762ef02947cf2f4cebdc6ccbdd90ffcc0c11a1b")
       vim-nix
       vim-commentary
       vim-exchange
@@ -133,7 +133,7 @@ in {
       # (customVimPluginGitLatest "ms-jpq/coq.artifacts")
       # (customVimPluginGitLatest "janet-lang/janet.vim")
       # (customVimPluginGitLatest "bakpakin/fennel.vim")
-      (customVimPluginGit "hwayne/tla.vim")
+      # (customVimPluginGit "hwayne/tla.vim")
     ];
   };
 }
