@@ -59,6 +59,12 @@ in
     sqld
     deno
     jdk21
+    unstablePkgs.awscli2
+    opam
+    gcc
+    google-chrome
+    bruno
+    anki-bin
   ];
   imports = [
     ./vim.nix
