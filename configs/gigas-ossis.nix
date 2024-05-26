@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
+    ./gigas-medulla.nix
   ];
 
   users.users.thanh = {
