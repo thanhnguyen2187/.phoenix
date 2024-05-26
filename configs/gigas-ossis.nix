@@ -1,6 +1,14 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+let 
+  home-manager = builtins.fetchTarball {
+    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+    sha256 = "sha256:1rvqd61537179nv0gxrx38bv5bpnz6gmcgwsrkma1zjpp6rjz7q9";
+  };
+in
+{
   imports = [
     ./gigas-medulla.nix
+    (import "${home-manager}/nixos")
   ];
 
   users.users.thanh = {
@@ -14,6 +22,7 @@
   zramSwap.enable = false;
   networking.hostName = "gigas";
   networking.domain = "";
+  networking.firewall.allowedTCPPorts = [ 8080 ];
   services.openssh.enable = true;
   users.users.root.openssh.authorizedKeys.keys = [
     ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCLtGjzMI2tgDgemd4UVFROrEvc9fR3ogxhrALbs/ehYuZi5wr0cCflKc8I8MYxrSdAk9pekYxBCBmqqrHWi6cmklcdUQVGbu/iXf6ZxfiyK93DmzIEnbOlbtw3y8atYd48mQzFTesC3k602DV77lWBWq09BxxozLL90I5A2uijWoE5R/nauuMqOyEncjXlVUynB9XFYjI+SHRXVOBLQPLfA/e17s2IR0md9iu7Hv7vurWyBJotYwvCuI9KV8Uc5p4D2ZrZ6HsS3JKF3+rXq10WDohm+NFl5hvPI8dRPO2yC2b8EB0RCGC8TuRtm6aa/H0/cJpk3WJT9KnwZeboGII1WWVk/QANBJbEhzJYybW7sbseVjWSb625xZ/CjmaGzqmOkRlOl4v733BIdKJbg1BHOKxpRdi80NbZ5VwkhqLs3IT2z8BlMrVW5bCxnpo/O0WTGEtmg0OmR6IhS4qtqgbdP4vSw9e+kqQSi3JYgMIMT1dM6Rov/O88vl+y0chS1gc= thanh@nixos''
@@ -21,9 +30,24 @@
   ];
 
   environment.systemPackages = with pkgs; [
-     vim
-     git
+    vim
+    git
+    qbittorrent-nox
   ];
+
+  systemd.services.qbittorrent-nox = {
+    description = "qBittorrent-NOX Daemon";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.qbittorrent-nox}/bin/qbittorrent-nox --webui-port=8080";
+      Restart = "on-failure";
+    };
+  };
+  home.file.".config/qBittorrent/qBittorrent.conf".text = builtins.readFile ./qBittorrent.conf;
+
+  programs.home-manager.enable = true;
 
   system.stateVersion = "23.11";
 }
