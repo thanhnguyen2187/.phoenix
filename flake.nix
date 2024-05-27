@@ -41,7 +41,7 @@
     nixosConfigurations.gigas = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configs/gigas.nix
+        ./configs/gigas-ossis.nix
       ];
     };
   };
