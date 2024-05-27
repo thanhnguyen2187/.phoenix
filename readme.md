@@ -34,6 +34,17 @@ sudo nixos-rebuild switch --flake .#vespertilio --impure
 home-manager switch --flake .#vespertilio
 ```
 
+- `gigas`: for VPS
+
+```shell
+nixos-rebuild switch \
+    --flake .#gigas \
+    --impure \
+    --fast \
+    --target-host root@<ip> \
+;
+```
+
 ## Notes
 
 `notes/` tells us why does the code within this repository exist as it is.
