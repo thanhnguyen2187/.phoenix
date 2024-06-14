@@ -1,9 +1,11 @@
-{ lib, config, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 let 
   home-manager = builtins.fetchTarball {
     url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-    sha256 = "sha256:1rvqd61537179nv0gxrx38bv5bpnz6gmcgwsrkma1zjpp6rjz7q9";
+    sha256 = "0jcwajzk7kvwb7crns5pw720hqp2y93fxd8ha533rygbqkgxxha9";
   };
+  cryptaa-server-repo = builtins.getFlake "git+https://github.com/thanhnguyen2187/cryptaa.git?rev=ccc6e8254542f65f96194eb7983eaf5a7d9ef272";
+  cryptaa-server = cryptaa-server-repo.packages.x86_64-linux.cryptaa-server;
 in
 {
   imports = [
@@ -22,7 +24,7 @@ in
   zramSwap.enable = false;
   networking.hostName = "gigas";
   networking.domain = "";
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 31746 ];
   services.openssh.enable = true;
   users.users.root.openssh.authorizedKeys.keys = [
     ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCLtGjzMI2tgDgemd4UVFROrEvc9fR3ogxhrALbs/ehYuZi5wr0cCflKc8I8MYxrSdAk9pekYxBCBmqqrHWi6cmklcdUQVGbu/iXf6ZxfiyK93DmzIEnbOlbtw3y8atYd48mQzFTesC3k602DV77lWBWq09BxxozLL90I5A2uijWoE5R/nauuMqOyEncjXlVUynB9XFYjI+SHRXVOBLQPLfA/e17s2IR0md9iu7Hv7vurWyBJotYwvCuI9KV8Uc5p4D2ZrZ6HsS3JKF3+rXq10WDohm+NFl5hvPI8dRPO2yC2b8EB0RCGC8TuRtm6aa/H0/cJpk3WJT9KnwZeboGII1WWVk/QANBJbEhzJYybW7sbseVjWSb625xZ/CjmaGzqmOkRlOl4v733BIdKJbg1BHOKxpRdi80NbZ5VwkhqLs3IT2z8BlMrVW5bCxnpo/O0WTGEtmg0OmR6IhS4qtqgbdP4vSw9e+kqQSi3JYgMIMT1dM6Rov/O88vl+y0chS1gc= thanh@nixos''
@@ -35,7 +37,25 @@ in
     qbittorrent-nox
     filebrowser
     yarr
+    nodejs
   ];
+
+  systemd.services.cryptaa-server = {
+    description = "Cryptaa Server Daemon";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      WorkingDirectory = "/root/Sources/cryptaa";
+      Environment = "PATH=/run/current-system/sw/bin";
+      ExecStart = lib.strings.concatStringsSep " " [
+        "${pkgs.nodejs}/bin/npm"
+        "run"
+        "server"
+      ];
+      Restart = "on-failure";
+    };
+  };
 
   systemd.services.qbittorrent-nox = {
     description = "qBittorrent-NOX Daemon";
@@ -87,10 +107,10 @@ in
 
   services.caddy = {
     enable = true;
-    virtualHosts."torrents-test.nguyenhuythanh.com".extraConfig = ''
+    virtualHosts."torrents.nguyenhuythanh.com".extraConfig = ''
       reverse_proxy 127.0.0.1:8080
     '';
-    virtualHosts."files-test.nguyenhuythanh.com".extraConfig = ''
+    virtualHosts."files.nguyenhuythanh.com".extraConfig = ''
       reverse_proxy 127.0.0.1:8081
     '';
     virtualHosts."feeds.nguyenhuythanh.com".extraConfig = ''
@@ -98,6 +118,10 @@ in
       basicauth /* {
           yarr $2a$14$OzGWTTtQzGtBwyJDVozKf.nEeQlQenemwZ8zv2W5oiAPLC8jRykSG
       }
+    '';
+    virtualHosts."notes-server.nguyenhuythanh.com".extraConfig = ''
+      reverse_proxy 127.0.0.1:5432
+      header Access-Control-Allow-Origin "*"
     '';
   };
 
@@ -109,6 +133,8 @@ in
     };
     home.file."Public/.exists".text = "";
     home.file.".config/yarr/.exists".text = "";
+    # Incredibly hacky way to do this.
+    # home.file."Sources/cryptaa".source = builtins.fetchGit "https://github.com/thanhnguyen2187/cryptaa";
   };
   system.stateVersion = "23.11";
 }
