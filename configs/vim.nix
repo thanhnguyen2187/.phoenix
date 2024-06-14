@@ -97,7 +97,8 @@ in {
 
     plugins = with pkgs.vimPlugins; [
       vim-sexp
-      (customVimPluginGit "vim-slime" "d762ef02947cf2f4cebdc6ccbdd90ffcc0c11a1b")
+      # (customVimPluginGit "vim-slime" "d762ef02947cf2f4cebdc6ccbdd90ffcc0c11a1b")
+      vim-slime
       vim-nix
       vim-commentary
       vim-exchange
