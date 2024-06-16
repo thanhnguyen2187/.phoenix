@@ -49,9 +49,11 @@ in
       WorkingDirectory = "/root/Sources/cryptaa";
       Environment = "PATH=/run/current-system/sw/bin";
       ExecStart = lib.strings.concatStringsSep " " [
-        "${pkgs.nodejs}/bin/npm"
-        "run"
-        "server"
+        "${pkgs.nodejs}/bin/npx"
+        "triplit dev"
+        "--schemaPath src/data/schema-triplit.ts"
+        "--dbPort 5432"
+        "--storage memory"
       ];
       Restart = "on-failure";
     };
@@ -121,7 +123,6 @@ in
     '';
     virtualHosts."notes-server.nguyenhuythanh.com".extraConfig = ''
       reverse_proxy 127.0.0.1:5432
-      header Access-Control-Allow-Origin "*"
     '';
   };
 
