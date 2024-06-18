@@ -10,7 +10,7 @@ in
 {
   home.username = "thanh";
   home.homeDirectory = "/home/thanh";
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
 
@@ -22,50 +22,51 @@ in
     (nerdfonts.override { fonts = ["JetBrainsMono"]; })
     neofetch
     zsh-powerlevel10k
-    mitschemeX11
-    ripgrep
-    hugo
-    go-task
+    # mitschemeX11
+    # ripgrep
+    # hugo
+    # go-task
     nodejs_20
-    yarn
+    nodejs_20.pkgs.pnpm
+    # yarn
     gitui
     go
-    jq
-    tmuxp
-    spotify
-    unstablePkgs.chromium
-    unstablePkgs.chromedriver
-    peek
-    rustup
-    calibre
-    sqlitebrowser
-    jetbrains.pycharm-community
-    jetbrains.pycharm-professional
-    jetbrains.idea-community
-    unstablePkgs.jetbrains.webstorm
+    # jq
+    # tmuxp
+    # spotify
+    # unstablePkgs.chromium
+    # unstablePkgs.chromedriver
+    # peek
+    # rustup
+    # calibre
+    # sqlitebrowser
+    # jetbrains.pycharm-community
+    # jetbrains.pycharm-professional
+    # jetbrains.idea-community
+    jetbrains.webstorm
     jetbrains.goland
-    jetbrains.datagrip
-    python3Full
-    gnumake
-    docker-compose
-    vivaldi
-    skypeforlinux
-    zotero
-    sqlite
+    # jetbrains.datagrip
+    # python3Full
+    # gnumake
+    # docker-compose
+    # vivaldi
+    # skypeforlinux
+    # zotero
+    # sqlite
     warpd
-    wally-cli
-    typst
-    codeium
-    csvkit
-    sqld
-    deno
-    jdk21
-    unstablePkgs.awscli2
-    opam
-    gcc
-    google-chrome
-    bruno
-    anki-bin
+    # wally-cli
+    # typst
+    # codeium
+    # csvkit
+    # sqld
+    # deno
+    # jdk21
+    # unstablePkgs.awscli2
+    # opam
+    # gcc
+    # google-chrome
+    # bruno
+    # anki-bin
     floorp
   ];
   imports = [
@@ -86,24 +87,24 @@ in
     '';
   };
 
-  programs.firefox = {
-    enable = true;
-    profiles = {
-      thanh = {
-        id = 0;
-        isDefault = true;
-        settings = {
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        };
-        userChrome = ''
-          /* Hide horizontal tabs at the top of the window */
-          #tabbrowser-tabs {
-            visibility: collapse !important;
-          }
-        '';
-      };
-    };
-  };
+  #programs.firefox = {
+  #  enable = true;
+  #  profiles = {
+  #    thanh = {
+  #      id = 0;
+  #      isDefault = true;
+  #      settings = {
+  #        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+  #      };
+  #      userChrome = ''
+  #        /* Hide horizontal tabs at the top of the window */
+  #        #tabbrowser-tabs {
+  #          visibility: collapse !important;
+  #        }
+  #      '';
+  #    };
+  #  };
+  #};
 
   programs.git = {
     enable = true;

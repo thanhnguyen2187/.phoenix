@@ -5,13 +5,9 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-    sha256 = "0x7lvvzi0lv7yvp97s0lkdiapxxpwqz8a86w2lk0dm14y1az23aq";
+    url = "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+    sha256 = "sha256:1vvrrk14vrhb6drj3fy8snly0sf24x3402ykb9q5j1gy99vvqqq6";
   };
-  nix-alien-pkgs = import (builtins.fetchTarball {
-    url = "https://github.com/thiagokokada/nix-alien/tarball/master";
-    sha256 = "sha256:1hyabg96lqplwq1drf9i9dbajzyayamdgzma1lka94scqxv3446s";
-  }) { };
 in
 {
   imports =
@@ -63,19 +59,24 @@ in
     ];
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver = {
+    enable = true;
+    # videoDrivers = ["nvidia"];
+    displayManager = {
+      gdm.enable = true;
+    };
+    desktopManager = {
+      gnome.enable = true;
+    };
+  };
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   # Enable CUPS to print documents.
@@ -108,72 +109,39 @@ in
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
-    #  thunderbird
-      nix-alien-pkgs.nix-alien
     ];
     shell = pkgs.zsh;
   };
   programs.zsh.enable = true;
-  # programs.nix-ld.enable = true;
+  programs.appimage.binfmt = true;
 
   virtualisation.docker.enable = true;
 
   nixpkgs.config = {
-    # Allow unfree packages
     allowUnfree = true;
-    # Add the nixpkgs channel to the Nix search path
-    # packageOverrides = pkgs: {
-    #   nixpkgs = pkgs.nixpkgs;
-    # };
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
      vim
-     # (home-manager.overrideAttrs (oldAttrs: {
-     #   useUserPackages = true;
-     # }))
      git
      ibus-engines.bamboo
-  #  wget
+     steam-run
   ];
 
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
       stdenv.cc.cc
+      fuse
+      glibc
     ];
   };
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 5173 5174 8080 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
 }
