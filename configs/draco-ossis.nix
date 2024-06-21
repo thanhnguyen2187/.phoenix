@@ -20,6 +20,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = [
     config.boot.kernelPackages.rtl88x2bu
   ];
@@ -59,20 +60,31 @@ in
     ];
   };
 
-  hardware.opengl.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+    nvidiaSettings = true;
+    # powerManagement.enable = true;
+  };
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
   services.xserver = {
     enable = true;
-    # videoDrivers = ["nvidia"];
+    videoDrivers = ["nvidia"];
     displayManager = {
-      gdm.enable = true;
+      # gdm.enable = true;
+      # gdm.wayland = false;
+      lightdm.enable = true;
+      defaultSession = "cinnamon";
     };
     desktopManager = {
-      gnome.enable = true;
+      # gnome.enable = true;
+      # mate.enable = true;
+      cinnamon.enable = true;
     };
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
     xkb = {
       layout = "us";
       variant = "";

@@ -2,7 +2,7 @@
 let
   unstablePkgs = import (builtins.fetchTarball {
     url = "https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable";
-    sha256 = "sha256:19zbxf7rb787jvyrfhl4z9sn3aisd6xvx6ikybbi75ym9sy39jds";
+    sha256 = "sha256:0cww7hyrdh5mylk2rb0v9i7iic0gy5qnn9sa7bz3rmnwwgjwys56";
   })
   { config = config.nixpkgs.config; system = "x86_64-linux"; };
   home-manager-unstable.url = "github:nix-community/home-manager";
@@ -43,8 +43,8 @@ in
     # jetbrains.pycharm-community
     # jetbrains.pycharm-professional
     # jetbrains.idea-community
-    jetbrains.webstorm
-    jetbrains.goland
+    unstablePkgs.jetbrains.webstorm
+    unstablePkgs.jetbrains.goland
     # jetbrains.datagrip
     # python3Full
     # gnumake
