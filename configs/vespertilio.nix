@@ -2,15 +2,14 @@
 let
   unstablePkgs = import (builtins.fetchTarball {
     url = "https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable";
-    sha256 = "sha256:15s3z0wg5lpyfl0cjjb6p5c0kr2yn79a4bz0zs6smaznc34a4p7x";
+    sha256 = "sha256:19zbxf7rb787jvyrfhl4z9sn3aisd6xvx6ikybbi75ym9sy39jds";
   })
   { config = config.nixpkgs.config; system = "x86_64-linux"; };
 in
 {
   home.username = "thanh";
   home.homeDirectory = "/home/thanh";
-
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
 
@@ -22,46 +21,52 @@ in
     (nerdfonts.override { fonts = ["JetBrainsMono"]; })
     neofetch
     zsh-powerlevel10k
-    mitschemeX11
-    ripgrep
-    hugo
-    go-task
-    nodejs
-    yarn
+    # mitschemeX11
+    # ripgrep
+    # hugo
+    # go-task
+    nodejs_20
+    nodejs_20.pkgs.pnpm
+    # yarn
     gitui
     go
-    jq
-    tmuxp
-    spotify
-    google-chrome
-    chromedriver
-    peek
-    rustup
-    calibre
-    sqlitebrowser
-    jetbrains.pycharm-community
-    jetbrains.pycharm-professional
-    jetbrains.idea-community
+    # jq
+    # tmuxp
+    # spotify
+    # unstablePkgs.chromium
+    # unstablePkgs.chromedriver
+    # peek
+    # rustup
+    # calibre
+    # sqlitebrowser
+    # jetbrains.pycharm-community
+    # jetbrains.pycharm-professional
+    # jetbrains.idea-community
     jetbrains.webstorm
     jetbrains.goland
-    jetbrains.datagrip
-    python3Full
-    gnumake
-    docker-compose
-    vivaldi
-    skypeforlinux
-    zotero
-    sqlite
+    # jetbrains.datagrip
+    # python3Full
+    # gnumake
+    # docker-compose
+    # vivaldi
+    # skypeforlinux
+    # zotero
+    # sqlite
     warpd
-    wally-cli
-    typst
-    vlc
-    codeium
-    deluge
-    csvkit
-    sqld
-    unstablePkgs.awscli2
-    anki-bin
+    # wally-cli
+    # typst
+    # codeium
+    # csvkit
+    # sqld
+    # deno
+    # jdk21
+    # unstablePkgs.awscli2
+    # opam
+    # gcc
+    # google-chrome
+    # bruno
+    # anki-bin
+    floorp
   ];
   imports = [
     ./vim.nix

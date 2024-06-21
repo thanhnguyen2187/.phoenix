@@ -142,6 +142,6 @@ in
 
   networking.firewall.allowedTCPPorts = [ 5173 5174 8080 ];
 
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.05";
 
 }

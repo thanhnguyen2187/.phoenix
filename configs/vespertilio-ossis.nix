@@ -1,13 +1,9 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-    sha256 = "0562y8awclss9k4wk3l4akw0bymns14sfy2q9n23j27m68ywpdkh";
+    url = "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+    sha256 = "sha256:1vvrrk14vrhb6drj3fy8snly0sf24x3402ykb9q5j1gy99vvqqq6";
   };
-  nix-alien-pkgs = import (builtins.fetchTarball {
-    url = "https://github.com/thiagokokada/nix-alien/tarball/master";
-    sha256 = "1731kbzrnbr65xwlvkv8r1rilj5ym2yhaxdijwxj552xnda93c4j";
-  }) { };
 in
 {
   imports =
@@ -20,9 +16,6 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
-  boot.extraModulePackages = [
-    # config.boot.kernelPackages.rtl88x2bu
-  ];
 
   networking.hostName = "vespertilio"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -50,8 +43,17 @@ in
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver = {
+    enable = true;
+    # videoDrivers = ["nvidia"];
+    displayManager = {
+      gdm.enable = true;
+    };
+    desktopManager = {
+      gnome.enable = true;
+    };
+  };
+
   hardware.opengl.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
@@ -62,14 +64,12 @@ in
     # package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   # Enable CUPS to print documents.
@@ -92,7 +92,6 @@ in
     description = "Thanh Nguyen";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-      nix-alien-pkgs.nix-alien
     ];
     shell = pkgs.zsh;
   };
@@ -111,9 +110,17 @@ in
      ibus-engines.bamboo
   ];
 
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc
+      fuse
+      glibc
+    ];
+  };
+
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
-  system.stateVersion = "23.11";
-
+  system.stateVersion = "24.05";
 }
