@@ -2,7 +2,7 @@
 let
   unstablePkgs = import (builtins.fetchTarball {
     url = "https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable";
-    sha256 = "sha256:0cww7hyrdh5mylk2rb0v9i7iic0gy5qnn9sa7bz3rmnwwgjwys56";
+    sha256 = "sha256:1nhn3hhnszq1j1nm7r6l3a698drsqzpzagyb059fvw6y8aawzkn6";
   })
   { config = config.nixpkgs.config; system = "x86_64-linux"; };
   home-manager-unstable.url = "github:nix-community/home-manager";
@@ -22,44 +22,40 @@ in
     (nerdfonts.override { fonts = ["JetBrainsMono"]; })
     neofetch
     zsh-powerlevel10k
-    # mitschemeX11
-    # ripgrep
-    # hugo
-    # go-task
+    ripgrep
+    go-task
     nodejs_20
     nodejs_20.pkgs.pnpm
-    # yarn
     gitui
     go
-    # jq
-    # tmuxp
-    # spotify
-    # unstablePkgs.chromium
-    # unstablePkgs.chromedriver
+    jq
+    unstablePkgs.chromium
+    unstablePkgs.chromedriver
     # peek
     # rustup
     # calibre
     # sqlitebrowser
     # jetbrains.pycharm-community
-    # jetbrains.pycharm-professional
+    jetbrains.pycharm-professional
     # jetbrains.idea-community
-    unstablePkgs.jetbrains.webstorm
-    unstablePkgs.jetbrains.goland
+    jetbrains.webstorm
+    jetbrains.goland
+    jetbrains.clion
     # jetbrains.datagrip
-    # python3Full
+    python3Full
     # gnumake
     # docker-compose
     # vivaldi
     # skypeforlinux
-    # zotero
+    zotero
     # sqlite
     warpd
     # wally-cli
-    # typst
+    typst
     # codeium
     # csvkit
     # sqld
-    # deno
+    deno
     # jdk21
     # unstablePkgs.awscli2
     # opam
@@ -68,6 +64,20 @@ in
     # bruno
     # anki-bin
     floorp
+    kaf
+    peek
+    usbutils
+    obsidian
+    ncspot
+    xmake
+    gcc
+    cling
+    syncthing
+    graphviz
+    activitywatch
+    keepassxc
+    mitscheme
+    mitmproxy
   ];
   imports = [
     ./vim.nix
@@ -133,6 +143,19 @@ in
 
   services.flameshot = {
     enable = true;
+  };
+
+  services.activitywatch = {
+    enable = true;
+  };
+
+  services.syncthing = {
+    enable = true;
+    tray = {
+      enable = true;
+      command = "syncthingtray";
+      package = pkgs.syncthingtray-minimal;
+    };
   };
 
   home.file.".ideavimrc".text = builtins.readFile ./vim/.ideavimrc;

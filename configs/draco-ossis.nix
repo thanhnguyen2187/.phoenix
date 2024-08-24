@@ -6,7 +6,7 @@
 let
   home-manager = builtins.fetchTarball {
     url = "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-    sha256 = "sha256:1vvrrk14vrhb6drj3fy8snly0sf24x3402ykb9q5j1gy99vvqqq6";
+    sha256 = "sha256:17cb6y4dymp351mj89y1bmxvqzw8m9h89nqd3qrwg6qjdm9sgkxa";
   };
 in
 {
@@ -21,8 +21,10 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [
-    config.boot.kernelPackages.rtl88x2bu
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    rtl88x2bu
+    # rtl8821au
+    rtl88xxau-aircrack
   ];
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -152,7 +154,8 @@ in
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
-  networking.firewall.allowedTCPPorts = [ 5173 5174 8080 ];
+  networking.firewall.allowedTCPPorts = [ 5173 5174 5175 8080 22000 ];
+  networking.firewall.allowedUDPPorts = [ 22000 21027 ];
 
   system.stateVersion = "24.05";
 
