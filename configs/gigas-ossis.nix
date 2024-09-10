@@ -1,8 +1,8 @@
 { inputs, lib, config, pkgs, ... }:
 let 
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-    sha256 = "0jcwajzk7kvwb7crns5pw720hqp2y93fxd8ha533rygbqkgxxha9";
+    url = "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+    sha256 = "sha256:1vvrrk14vrhb6drj3fy8snly0sf24x3402ykb9q5j1gy99vvqqq6";
   };
   cryptaa-server-repo = builtins.getFlake "git+https://github.com/thanhnguyen2187/cryptaa.git?rev=ccc6e8254542f65f96194eb7983eaf5a7d9ef272";
   cryptaa-server = cryptaa-server-repo.packages.x86_64-linux.cryptaa-server;
@@ -29,6 +29,7 @@ in
   users.users.root.openssh.authorizedKeys.keys = [
     ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCLtGjzMI2tgDgemd4UVFROrEvc9fR3ogxhrALbs/ehYuZi5wr0cCflKc8I8MYxrSdAk9pekYxBCBmqqrHWi6cmklcdUQVGbu/iXf6ZxfiyK93DmzIEnbOlbtw3y8atYd48mQzFTesC3k602DV77lWBWq09BxxozLL90I5A2uijWoE5R/nauuMqOyEncjXlVUynB9XFYjI+SHRXVOBLQPLfA/e17s2IR0md9iu7Hv7vurWyBJotYwvCuI9KV8Uc5p4D2ZrZ6HsS3JKF3+rXq10WDohm+NFl5hvPI8dRPO2yC2b8EB0RCGC8TuRtm6aa/H0/cJpk3WJT9KnwZeboGII1WWVk/QANBJbEhzJYybW7sbseVjWSb625xZ/CjmaGzqmOkRlOl4v733BIdKJbg1BHOKxpRdi80NbZ5VwkhqLs3IT2z8BlMrVW5bCxnpo/O0WTGEtmg0OmR6IhS4qtqgbdP4vSw9e+kqQSi3JYgMIMT1dM6Rov/O88vl+y0chS1gc= thanh@nixos''
     ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzKHwhyaPJpzSw+/gR6zMDEcZQF1SZfjrrr+6YzHyiIfAxczX1ovADtY2Nx0hRO+e/qjxv1tl0TV0BNFo7g5A+NO1/wYAAMcdj7h3j1cRDPwE6ljkvHHt5WWpnP57Bkx+nGAsvx2tHX//6IMRSPYKb1DTmHecjq/nRwpqC1MpF+9r4HbqEq5W53Clvq5kKPnNWIfnX90Dzgy4eTb6L50jwAs1MuttN9dahhtuEtmLlp3EsSuUsX/xHCLweNipMvr5lpS5tYaNHE/mNl3/QeHkMAznS48YC8UVR/7scdyPawvU2G6/lAqNv7i/k9m1q6InHrgeUSKpSjDOZZXdvtcoN33wR9ywzC0BCgBJ9qSXW949ig5+A5Ys3zHFTKTRI1zkzd64w1cCQbrq+dXZ5OZLXzV498CRD9wNx1f4g5hPj8yUJDNDVsABClsEe/rbeiBq3WXL4E/NXEYKp+GskxWSCPAFQ9qTKTz1n3PwIDPczxgMIa/ppZ+hRbd96tH9IoP8= thanh@nixos'' 
+    ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOIpwjQHb5v/b9fSdyaP0LrAMD8FScR/NbHPQuFcKX5w thanh@vespertilio''
   ];
 
   environment.systemPackages = with pkgs; [
@@ -53,6 +54,29 @@ in
         "triplit dev"
         "--schemaPath src/data/schema-triplit.ts"
         "--dbPort 5432"
+        "--storage memory"
+      ];
+      Restart = "on-failure";
+    };
+  };
+
+  systemd.services.cryptaa-server-demo = {
+    description = "Cryptaa Server Demo Daemon";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      WorkingDirectory = "/root/Sources/cryptaa";
+      Environment =[
+        "PATH=/run/current-system/sw/bin"
+        "TRIPLIT_JWT_SECRET=super-secret"
+        "TRIPLIT_PROJECT_ID=cryptaa-server"
+      ];
+      ExecStart = lib.strings.concatStringsSep " " [
+        "${pkgs.nodejs}/bin/npx"
+        "triplit dev"
+        "--schemaPath src/data/schema-triplit.ts"
+        "--dbPort 5431"
         "--storage memory"
       ];
       Restart = "on-failure";
@@ -124,10 +148,13 @@ in
     virtualHosts."notes-server.nguyenhuythanh.com".extraConfig = ''
       reverse_proxy 127.0.0.1:5432
     '';
+    virtualHosts."cryptaa-server-demo.nguyenhuythanh.com".extraConfig = ''
+      reverse_proxy 127.0.0.1:5431
+    '';
   };
 
   home-manager.users.root = {
-    home.stateVersion = "23.11";
+    home.stateVersion = "24.05";
     home.file.".config/qBittorrent/config/qBittorrent.conf" = {
       text = builtins.readFile ./qBittorrent.conf;
       force = true;
@@ -137,6 +164,6 @@ in
     # Incredibly hacky way to do this.
     # home.file."Sources/cryptaa".source = builtins.fetchGit "https://github.com/thanhnguyen2187/cryptaa";
   };
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
 
