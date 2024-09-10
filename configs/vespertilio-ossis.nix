@@ -54,6 +54,8 @@ in
     };
   };
 
+  services.dnsmasq.enable = true;
+
   hardware.opengl.enable = true;
   hardware.nvidia = {
     modesetting.enable = true;
@@ -121,6 +123,8 @@ in
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
+
+  networking.firewall.allowedTCPPorts = [ 5173 5174 5175 8080 ];
 
   system.stateVersion = "24.05";
 }

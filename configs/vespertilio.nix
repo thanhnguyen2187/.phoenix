@@ -2,7 +2,7 @@
 let
   unstablePkgs = import (builtins.fetchTarball {
     url = "https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable";
-    sha256 = "sha256:19zbxf7rb787jvyrfhl4z9sn3aisd6xvx6ikybbi75ym9sy39jds";
+    sha256 = "sha256:15s3z0wg5lpyfl0cjjb6p5c0kr2yn79a4bz0zs6smaznc34a4p7x";
   })
   { config = config.nixpkgs.config; system = "x86_64-linux"; };
 in
@@ -30,7 +30,7 @@ in
     # yarn
     gitui
     go
-    # jq
+    jq
     # tmuxp
     # spotify
     # unstablePkgs.chromium
@@ -51,22 +51,21 @@ in
     # vivaldi
     # skypeforlinux
     # zotero
-    # sqlite
+    sqlite
     warpd
     # wally-cli
     # typst
-    # codeium
-    # csvkit
-    # sqld
-    # deno
-    # jdk21
-    # unstablePkgs.awscli2
-    # opam
-    # gcc
-    # google-chrome
-    # bruno
-    # anki-bin
+    deluge
     floorp
+    vlc
+    unstablePkgs.chromium
+    obsidian
+    zotero
+    syncthing
+    keepassxc
+    pdftk
+    hugo
+    gnumake
   ];
   imports = [
     ./vim.nix
