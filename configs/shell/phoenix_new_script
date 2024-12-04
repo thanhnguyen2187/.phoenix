@@ -29,6 +29,7 @@ def main():
     
     # Get parameters
     filename = sys.argv[1]
+    filepath = f'configs/shell/{filename}'
     language = sys.argv[2]
     
     # Check current directory
@@ -47,13 +48,13 @@ def main():
     
     # Create the file
     try:
-        with open(filename, 'w') as f:
+        with open(filepath, 'w') as f:
             f.write(f"{shebang}\n\n")
             f.write(f"{hello_world}\n")
         
         # Make the file executable
-        os.chmod(filename, 0o755)
-        print(f"Successfully created {filename}")
+        os.chmod(filepath, 0o755)
+        print(f"Successfully created {filepath}")
     
     except Exception as e:
         print(f"Error creating file: {e}")
