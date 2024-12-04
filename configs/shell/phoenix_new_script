@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+
+import os
+import sys
+
+def get_shebang(language):
+    """Return appropriate shebang based on language."""
+    shebangs = {
+        'python': '#!/usr/bin/env python',
+        'shell': '#!/usr/bin/env bash',
+        'javascript': '#!/usr/bin/env node'
+    }
+    return shebangs.get(language.lower(), '')
+
+def get_hello_world(language):
+    """Return hello world statement based on language."""
+    hello_worlds = {
+        'python': 'print("Hello world")',
+        'shell': 'echo "Hello world"',
+        'javascript': 'console.log("Hello world");'
+    }
+    return hello_worlds.get(language.lower(), '')
+
+def main():
+    # Check if we have the correct number of arguments
+    if len(sys.argv) != 3:
+        print("Usage: phoenix_new_script <filename> <language>")
+        sys.exit(1)
+    
+    # Get parameters
+    filename = sys.argv[1]
+    language = sys.argv[2]
+    
+    # Check current directory
+    current_dir = os.path.basename(os.getcwd())
+    if current_dir != '.phoenix':
+        print("Error: Script must be run from .phoenix directory")
+        sys.exit(1)
+    
+    # Get appropriate shebang and hello world statement
+    shebang = get_shebang(language)
+    hello_world = get_hello_world(language)
+    
+    if not shebang or not hello_world:
+        print("Error: Unsupported language. Supported languages: python, shell, javascript")
+        sys.exit(1)
+    
+    # Create the file
+    try:
+        with open(filename, 'w') as f:
+            f.write(f"{shebang}\n\n")
+            f.write(f"{hello_world}\n")
+        
+        # Make the file executable
+        os.chmod(filename, 0o755)
+        print(f"Successfully created {filename}")
+    
+    except Exception as e:
+        print(f"Error creating file: {e}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
+
