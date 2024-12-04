@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+
+id_old = input("Paste old subgraph's ID: ")
+block_new = input("Paste new subgraph's starting block: ")
+
+input("Replace the grafting file (Enter after finished)")
+input("Generate new config file (Enter after finished)")
+input("Build the subgraph (Enter after finished)")
+input("Deploy to development endpoint (Enter after finished)")
+input("Check if development endpoint works (Enter after finished)")
+input("Deploy to production endpoint (Enter after finished)")
+
+print("Finished!")
+
