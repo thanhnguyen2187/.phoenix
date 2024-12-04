@@ -1,3 +1,22 @@
 #!/usr/bin/env python
 
-print("Hello world")
+pool = input("Paste new pool address: ")
+
+assets = []
+while True:
+    asset = input("Paste new asset address (empty to finish): ")
+    if asset == "":
+        break
+
+    assets.append(asset)
+
+input(f"Add pool {pool.lower()}'s name to Analytics page (Enter after finished)")
+
+for asset in assets:
+    input(f"Add asset {asset.lower()}'s price to subgraph (Enter after finished)")
+
+for asset in assets:
+    input(f"Add asset {asset.lower()}'s token icon (Enter after finished)")
+
+print("Finished!")
+
