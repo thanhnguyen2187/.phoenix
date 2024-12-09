@@ -39,6 +39,7 @@ in
     filebrowser
     yarr
     nodejs
+    python3
   ];
 
   systemd.services.cryptaa-server = {
@@ -150,6 +151,9 @@ in
     '';
     virtualHosts."cryptaa-server-demo.nguyenhuythanh.com".extraConfig = ''
       reverse_proxy 127.0.0.1:5431
+    '';
+    virtualHosts."webdav.nguyenhuythanh.com".extraConfig = ''
+      reverse_proxy 127.0.0.1:6065
     '';
   };
 
