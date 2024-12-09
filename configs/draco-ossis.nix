@@ -6,7 +6,7 @@
 let
   home-manager = builtins.fetchTarball {
     url = "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-    sha256 = "sha256:17cb6y4dymp351mj89y1bmxvqzw8m9h89nqd3qrwg6qjdm9sgkxa";
+    sha256 = "sha256:00wp0s9b5nm5rsbwpc1wzfrkyxxmqjwsc1kcibjdbfkh69arcpsn";
   };
 in
 {
@@ -73,6 +73,10 @@ in
     driSupport = true;
     driSupport32Bit = true;
   };
+  # hardware.opentabletdriver = {
+  #   enable = true;
+  #   daemon.enable = true;
+  # };
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];

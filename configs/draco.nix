@@ -2,7 +2,7 @@
 let
   unstablePkgs = import (builtins.fetchTarball {
     url = "https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable";
-    sha256 = "sha256:1nhn3hhnszq1j1nm7r6l3a698drsqzpzagyb059fvw6y8aawzkn6";
+    sha256 = "sha256:0b39jqms70gi7hy611nlgy9vdcfkfwk505c9dxjmjyl6pbbdn5pn";
   })
   { config = config.nixpkgs.config; system = "x86_64-linux"; };
   home-manager-unstable.url = "github:nix-community/home-manager";
@@ -20,64 +20,51 @@ in
   home.packages = with pkgs; [
     xclip
     (nerdfonts.override { fonts = ["JetBrainsMono"]; })
+    sqlite
     neofetch
     zsh-powerlevel10k
     ripgrep
     go-task
-    nodejs_20
-    nodejs_20.pkgs.pnpm
+    nodejs_22
     gitui
     go
     jq
+    floorp
+    openssl
+    # skypeforlinux
     unstablePkgs.chromium
     unstablePkgs.chromedriver
     # peek
     # rustup
     # calibre
-    # sqlitebrowser
     # jetbrains.pycharm-community
     jetbrains.pycharm-professional
     # jetbrains.idea-community
     jetbrains.webstorm
     jetbrains.goland
-    jetbrains.clion
+    # jetbrains.clion
     # jetbrains.datagrip
     python3Full
-    # gnumake
-    # docker-compose
-    # vivaldi
-    # skypeforlinux
-    zotero
+    zotero_7
     # sqlite
     warpd
     # wally-cli
     typst
-    # codeium
-    # csvkit
-    # sqld
     deno
-    # jdk21
-    # unstablePkgs.awscli2
-    # opam
-    # gcc
-    # google-chrome
-    # bruno
-    # anki-bin
-    floorp
-    kaf
+    # firefox
     peek
-    usbutils
     obsidian
-    ncspot
-    xmake
     gcc
-    cling
     syncthing
     graphviz
-    activitywatch
     keepassxc
     mitscheme
-    mitmproxy
+    hugo
+    pdftk
+    sshuttle
+    # opentabletdriver
+    libsForQt5.xp-pen-deco-01-v2-driver
+    websocat
   ];
   imports = [
     ./vim.nix
@@ -97,24 +84,24 @@ in
     '';
   };
 
-  #programs.firefox = {
-  #  enable = true;
-  #  profiles = {
-  #    thanh = {
-  #      id = 0;
-  #      isDefault = true;
-  #      settings = {
-  #        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-  #      };
-  #      userChrome = ''
-  #        /* Hide horizontal tabs at the top of the window */
-  #        #tabbrowser-tabs {
-  #          visibility: collapse !important;
-  #        }
-  #      '';
-  #    };
-  #  };
-  #};
+  programs.firefox = {
+    enable = true;
+    profiles = {
+      thanh = {
+        id = 0;
+        isDefault = true;
+        # settings = {
+        #   "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        # };
+        # userChrome = ''
+        #   /* Hide horizontal tabs at the top of the window */
+        #   #tabbrowser-tabs {
+        #     visibility: collapse !important;
+        #   }
+        # '';
+      };
+    };
+  };
 
   programs.git = {
     enable = true;
