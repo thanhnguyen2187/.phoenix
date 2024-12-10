@@ -19,7 +19,7 @@ nix \
     --extra-experimental-features "nix-command flakes" \
     run home-manager/release-24.11 -- \
     --extra-experimental-features "nix-command flakes" \
-    switch --flake .#draco
+    switch --flake .#<name>
 ```
 
 To apply Home Manager configuration:
