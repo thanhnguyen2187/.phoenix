@@ -12,6 +12,16 @@ To apply NixOS operating system configuration:
 sudo nixos-rebuild switch --flake .#<name> --impure
 ```
 
+First command when `home-manager` is not available in `$PATH`:
+
+```shell
+nix \
+    --extra-experimental-features "nix-command flakes" \
+    run home-manager/release-24.11 -- \
+    --extra-experimental-features "nix-command flakes" \
+    switch --flake .#draco
+```
+
 To apply Home Manager configuration:
 
 ```shell
