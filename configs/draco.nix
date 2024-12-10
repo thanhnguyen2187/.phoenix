@@ -2,7 +2,7 @@
 let
   unstablePkgs = import (builtins.fetchTarball {
     url = "https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable";
-    sha256 = "sha256:0b39jqms70gi7hy611nlgy9vdcfkfwk505c9dxjmjyl6pbbdn5pn";
+    sha256 = "sha256:0wlzlsxnc67zcdl0v6d5bp57a8fn7wmv8mj0jv368n2nfvz0w09m";
   })
   { config = config.nixpkgs.config; system = "x86_64-linux"; };
   home-manager-unstable.url = "github:nix-community/home-manager";
@@ -10,7 +10,7 @@ in
 {
   home.username = "thanh";
   home.homeDirectory = "/home/thanh";
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   programs.home-manager.enable = true;
 

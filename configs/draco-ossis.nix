@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+    url = "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
     sha256 = "sha256:00wp0s9b5nm5rsbwpc1wzfrkyxxmqjwsc1kcibjdbfkh69arcpsn";
   };
 in
@@ -19,7 +19,7 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = with config.boot.kernelPackages; [
     rtl88x2bu
@@ -27,7 +27,7 @@ in
     rtl88xxau-aircrack
   ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "draco"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -70,8 +70,8 @@ in
   };
   hardware.opengl = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    # driSupport = true;
+    # driSupport32Bit = true;
   };
   # hardware.opentabletdriver = {
   #   enable = true;
@@ -81,15 +81,15 @@ in
     enable = true;
     videoDrivers = ["nvidia"];
     displayManager = {
-      # gdm.enable = true;
+      gdm.enable = true;
       # gdm.wayland = false;
-      lightdm.enable = true;
-      defaultSession = "cinnamon";
+      # lightdm.enable = true;
+      defaultSession = "gnome";
     };
     desktopManager = {
-      # gnome.enable = true;
+      gnome.enable = true;
       # mate.enable = true;
-      cinnamon.enable = true;
+      # cinnamon.enable = true;
     };
     xkb = {
       layout = "us";
@@ -101,7 +101,7 @@ in
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  # sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -144,6 +144,7 @@ in
      git
      ibus-engines.bamboo
      steam-run
+     home-manager
   ];
 
   programs.nix-ld = {
@@ -161,6 +162,6 @@ in
   networking.firewall.allowedTCPPorts = [ 5173 5174 5175 8080 22000 ];
   networking.firewall.allowedUDPPorts = [ 22000 21027 ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
 }
