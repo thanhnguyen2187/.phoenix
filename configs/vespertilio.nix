@@ -50,22 +50,24 @@ in
     # docker-compose
     # vivaldi
     # skypeforlinux
-    # zotero
     sqlite
     warpd
     # wally-cli
-    # typst
+    typst
     deluge
     floorp
     vlc
     unstablePkgs.chromium
     obsidian
-    zotero
+    zotero_7
     syncthing
     keepassxc
     pdftk
     hugo
     gnumake
+    sshuttle
+    websocat
+    libsForQt5.xp-pen-deco-01-v2-driver
   ];
   imports = [
     ./vim.nix
@@ -91,15 +93,15 @@ in
       thanh = {
         id = 0;
         isDefault = true;
-        settings = {
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        };
-        userChrome = ''
-          /* Hide horizontal tabs at the top of the window */
-          #tabbrowser-tabs {
-            visibility: collapse !important;
-          }
-        '';
+        # settings = {
+        #   "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        # };
+        # userChrome = ''
+        #   /* Hide horizontal tabs at the top of the window */
+        #   #tabbrowser-tabs {
+        #     visibility: collapse !important;
+        #   }
+        # '';
       };
     };
   };
