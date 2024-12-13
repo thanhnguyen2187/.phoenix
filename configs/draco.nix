@@ -46,7 +46,6 @@ in
     # jetbrains.datagrip
     python3Full
     zotero_7
-    # sqlite
     warpd
     # wally-cli
     typst
@@ -142,6 +141,35 @@ in
       enable = true;
       command = "syncthingtray";
       package = pkgs.syncthingtray-minimal;
+    };
+  };
+
+  systemd.user.services.warpd = {
+    Unit = {
+      Description = "Modal keyboard-driven pointer control";
+      PartOf = [ "graphical-session.target" ];
+      After = [
+        "graphical-session.target"
+        "graphical-session-pre.target"
+        "window-maanger.target"
+      ];
+    };
+
+    Service = {
+      ExecStart = "${pkgs.warpd}/bin/warpd";
+      
+      # Restart on failure
+      Restart = "on-failure";
+      RestartSec = 3;
+      
+      # Kill the process on session logout
+      KillMode = "process";
+
+      Type = "simple";
+    };
+
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 
