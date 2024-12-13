@@ -56,7 +56,8 @@ in
   };
 
   i18n.inputMethod = {
-    enabled = "ibus";
+    enable = true;
+    type = "ibus";
     ibus.engines = with pkgs.ibus-engines; [
       bamboo
     ];
@@ -81,15 +82,15 @@ in
     enable = true;
     videoDrivers = ["nvidia"];
     displayManager = {
-      gdm.enable = true;
+      # gdm.enable = true;
       # gdm.wayland = false;
-      # lightdm.enable = true;
-      defaultSession = "gnome";
+      lightdm.enable = true;
     };
     desktopManager = {
-      gnome.enable = true;
+      # gnome.enable = true;
       # mate.enable = true;
       # cinnamon.enable = true;
+      deepin.enable = true;
     };
     xkb = {
       layout = "us";
@@ -163,5 +164,4 @@ in
   networking.firewall.allowedUDPPorts = [ 22000 21027 ];
 
   system.stateVersion = "24.11";
-
 }
