@@ -59,6 +59,17 @@ nixos-rebuild switch \
 
 `notes/` tells us why does the code within this repository exist as it is.
 
+## Version Update
+
+A new version of `nixpkgs`, the package repository behind Nix and NixOS, is
+released every 6 months. Therefore, we should strive to keep the versions within
+this config set up-to-date. Generally, to update the config files in this
+repository, we should:
+
+- Update `flake.nix`
+- Depends on the machine, upgrade relevant config files (for example, with
+  Draco, do `draco.nix` and `draco-ossis.nix`)
+
 ## TODO
 
 - [ ] Investigate why `--impure` is needed
