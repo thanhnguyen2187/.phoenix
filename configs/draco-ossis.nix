@@ -57,9 +57,12 @@ in
 
   i18n.inputMethod = {
     enable = true;
-    type = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      bamboo
+    type = "fcitx5";
+    # ibus.engines = with pkgs.ibus-engines; [
+    #   bamboo
+    # ];
+    fcitx5.addons = with pkgs; [
+      fcitx5-unikey
     ];
   };
 
@@ -90,7 +93,8 @@ in
       # gnome.enable = true;
       # mate.enable = true;
       # cinnamon.enable = true;
-      deepin.enable = true;
+      budgie.enable = true;
+      # deepin.enable = true;
     };
     xkb = {
       layout = "us";
@@ -160,7 +164,15 @@ in
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
 
-  networking.firewall.allowedTCPPorts = [ 5173 5174 5175 8080 22000 ];
+  networking.firewall.allowedTCPPorts = [
+    3000
+    3001
+    5173
+    5174
+    5175
+    8080
+    22000
+  ];
   networking.firewall.allowedUDPPorts = [ 22000 21027 ];
 
   system.stateVersion = "24.11";
