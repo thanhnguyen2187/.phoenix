@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-    sha256 = "sha256:1vvrrk14vrhb6drj3fy8snly0sf24x3402ykb9q5j1gy99vvqqq6";
+    url = "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
+    sha256 = "sha256:0b41b251gxbrfrqplp2dkxv00x8ls5x5b3n5izs4nxkcbhkjjadz";
   };
 in
 {
@@ -45,12 +45,14 @@ in
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    # videoDrivers = ["nvidia"];
+    videoDrivers = ["nvidia"];
     displayManager = {
       gdm.enable = true;
+      # lightdm.enable = true;
     };
     desktopManager = {
-      gnome.enable = true;
+      # gnome.enable = true;
+      budgie.enable = true;
     };
   };
 
@@ -78,7 +80,7 @@ in
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+  # sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -126,5 +128,5 @@ in
 
   networking.firewall.allowedTCPPorts = [ 5173 5174 5175 8080 ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
