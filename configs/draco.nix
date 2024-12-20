@@ -35,14 +35,14 @@ in
     unstablePkgs.chromium
     unstablePkgs.chromedriver
     # peek
-    # rustup
+    rustup
     # calibre
     # jetbrains.pycharm-community
     jetbrains.pycharm-professional
     # jetbrains.idea-community
     jetbrains.webstorm
     jetbrains.goland
-    # jetbrains.clion
+    jetbrains.rust-rover
     # jetbrains.datagrip
     python3Full
     zotero_7
@@ -64,6 +64,7 @@ in
     # opentabletdriver
     libsForQt5.xp-pen-deco-01-v2-driver
     websocat
+    uv
   ];
   imports = [
     ./vim.nix
