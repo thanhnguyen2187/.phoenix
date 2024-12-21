@@ -16,6 +16,10 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
+  # boot.plymouth.enable = true;
+  # boot.kernelParams = [
+  #   "nvidia-drm.modeset=1"
+  # ];
 
   networking.hostName = "vespertilio"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -36,45 +40,45 @@ in
   };
 
   i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      bamboo
+    enable = true;
+    type = "fcitx5";
+    # ibus.engines = with pkgs.ibus-engines; [
+    #   bamboo
+    # ];
+    fcitx5.addons = with pkgs; [
+      fcitx5-unikey
     ];
   };
 
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    videoDrivers = ["nvidia"];
+    # videoDrivers = ["nvidia"];
     displayManager = {
-      gdm.enable = true;
-      # lightdm.enable = true;
+      # gdm.enable = true;
+      lightdm.enable = true;
     };
     desktopManager = {
       # gnome.enable = true;
       budgie.enable = true;
+    };
+    xkb = {
+      layout = "us";
+      variant = "";
     };
   };
 
   services.dnsmasq.enable = true;
 
   hardware.opengl.enable = true;
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  # Configure keymap in X11
-  services.xserver = {
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-  };
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+  #   powerManagement.enable = true;
+  #   # powerManagement.finegrained = false;
+  #   open = false;
+  #   nvidiaSettings = true;
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -89,6 +93,9 @@ in
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  # security.pam.services.lightdm.enableGnomeKeyring = true;
+  # services.gnome.gnome-keyring.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.thanh = {
