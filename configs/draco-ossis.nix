@@ -158,6 +158,13 @@ in
       stdenv.cc.cc
       fuse
       glibc
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libxcb                                                                                                                                                                                                                       
+      xorg.libXi
+      libxkbcommon                                                                                                                                                                                                                      
+      libz
+      libGL
     ];
   };
 
