@@ -21,7 +21,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
-        "kubectl"
+        "direnv"
       ];
     };
   };

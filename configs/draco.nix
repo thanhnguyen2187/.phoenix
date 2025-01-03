@@ -65,6 +65,7 @@ in
     libsForQt5.xp-pen-deco-01-v2-driver
     websocat
     uv
+    rnote
   ];
   imports = [
     ./vim.nix
@@ -172,6 +173,12 @@ in
     Install = {
       WantedBy = [ "graphical-session.target" ];
     };
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true; # see note on other shells below
+    nix-direnv.enable = true;
   };
 
   home.file.".ideavimrc".text = builtins.readFile ./vim/.ideavimrc;
