@@ -22,9 +22,9 @@ in
     neofetch
     zsh-powerlevel10k
     # mitschemeX11
-    # ripgrep
-    # hugo
-    # go-task
+    ripgrep
+    hugo
+    go-task
     nodejs_20
     nodejs_20.pkgs.pnpm
     # yarn
@@ -36,7 +36,7 @@ in
     # unstablePkgs.chromium
     # unstablePkgs.chromedriver
     # peek
-    # rustup
+    rustup
     # calibre
     # sqlitebrowser
     # jetbrains.pycharm-community
@@ -44,6 +44,7 @@ in
     # jetbrains.idea-community
     jetbrains.webstorm
     jetbrains.goland
+    jetbrains.rust-rover
     # jetbrains.datagrip
     # python3Full
     # gnumake
@@ -68,6 +69,8 @@ in
     sshuttle
     websocat
     libsForQt5.xp-pen-deco-01-v2-driver
+    # zed-editor
+    gcc
   ];
   imports = [
     ./vim.nix
