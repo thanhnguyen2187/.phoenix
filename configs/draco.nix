@@ -153,7 +153,7 @@ in
       After = [
         "graphical-session.target"
         "graphical-session-pre.target"
-        "window-maanger.target"
+        "window-manager.target"
       ];
     };
 
