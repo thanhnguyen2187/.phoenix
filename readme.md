@@ -55,6 +55,17 @@ nixos-rebuild switch \
 ;
 ```
 
+- `petram`: for home server
+
+```shell
+nixos-rebuild switch \
+    --flake .#petram \
+    --impure \
+    --fast \
+    --target-host root@<ip> \
+;
+```
+
 ## Notes
 
 `notes/` tells us why does the code within this repository exist as it is.

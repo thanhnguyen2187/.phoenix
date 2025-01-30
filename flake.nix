@@ -44,5 +44,11 @@
         ./configs/gigas-ossis.nix
       ];
     };
+    nixosConfigurations.petram = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./configs/petram-cor.nix
+      ];
+    };
   };
 }
