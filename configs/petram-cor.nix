@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./petram-medulla.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -38,6 +38,9 @@
     git
   ];
 
+  services.postgresql.enable = true;
+  services.postgresql.package = pkgs.postgresql_17;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -67,8 +70,17 @@
     lidSwitchDocked = "ignore";         # Same behavior when docked
   };
 
+  services.syncthing = {
+    enable = true;
+    guiAddress = "0.0.0.0:8384";
+  };
+
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [
+    22
+    5432
+    8384
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
