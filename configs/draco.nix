@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, system, ... }:
 let
   unstablePkgs = import (builtins.fetchTarball {
     url = "https://github.com/nixos/nixpkgs/tarball/nixpkgs-unstable";
@@ -43,7 +43,7 @@ in
     jetbrains.webstorm
     jetbrains.goland
     jetbrains.rust-rover
-    # jetbrains.datagrip
+    jetbrains.datagrip
     python3Full
     zotero_7
     warpd
@@ -65,7 +65,10 @@ in
     libsForQt5.xp-pen-deco-01-v2-driver
     websocat
     uv
-    rnote
+    # rnote
+    # code2prompt
+    # claude-desktop.packages.${system}.claude-desktop
+    framesh
   ];
   imports = [
     ./vim.nix

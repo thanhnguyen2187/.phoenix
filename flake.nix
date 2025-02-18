@@ -6,6 +6,12 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # flake-utils.url = "github:numtide/flake-utils";
+    # claude-desktop = {
+    #   url = "github:k3d3/claude-desktop-linux-flake";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.flake-utils.follows = "flake-utils";
+    # };
   };
   outputs = { home-manager, nixpkgs, ... }:
   let
@@ -16,6 +22,7 @@
       inherit pkgs;
       modules = [
         ./configs/draco.nix
+        # claude-desktop
       ];
     };
     nixosConfigurations.draco = nixpkgs.lib.nixosSystem {
