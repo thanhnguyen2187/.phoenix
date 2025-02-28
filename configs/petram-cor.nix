@@ -75,11 +75,115 @@
     guiAddress = "0.0.0.0:8384";
   };
 
+  services.glance = {
+    enable = true;
+    settings = {
+      server = {
+        host = "0.0.0.0";  # Change to "0.0.0.0" if you want to access from other machines
+      };
+      pages = [
+        {
+          name = "Dashboard";
+          columns = [
+            {
+              size = "small";
+              widgets = [
+                {
+                  type = "markets";
+                  symbol-link-template = "https://www.tradingview.com/symbols/{SYMBOL}/news";
+                  markets = [
+                    {
+                      symbol = "BTC-USD";
+                      name = "Bitcoin";
+                    }
+                    {
+                      symbol = "ETH-USD";
+                      name = "Ethereum";
+                    }
+                  ];
+                }
+              ];
+            }
+            {
+              size = "full";
+              widgets = [
+                {
+                  type = "group";
+                  widgets = [
+                    {
+                      type = "hacker-news";
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "programming";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "webdev";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "rust";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "quant";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "algotrading";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "clojure";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "lisp";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "python";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "golang";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "javascript";
+                      show-thumbnails = true;
+                    }
+                    {
+                      type = "reddit";
+                      subreddit = "sveltejs";
+                      show-thumbnails = true;
+                    }
+                  ];
+                }
+              ];
+            }
+          ];
+        }
+      ];
+    };
+  };
+
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     22
-    5432
-    8384
+    5432 # Postgres
+    8384 # Syncthing
+    8080 # Glance
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
