@@ -125,11 +125,15 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="01e0", MODE="0666"
+  '';
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.thanh = {
     isNormalUser = true;
     description = "Thanh Nguyen";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "dialout" ];
     packages = with pkgs; [
       firefox
     ];
