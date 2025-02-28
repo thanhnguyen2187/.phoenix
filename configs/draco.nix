@@ -63,12 +63,13 @@ in
     sshuttle
     # opentabletdriver
     libsForQt5.xp-pen-deco-01-v2-driver
-    websocat
+    # websocat
     uv
     # rnote
     # code2prompt
     # claude-desktop.packages.${system}.claude-desktop
     framesh
+    overmind
   ];
   imports = [
     ./vim.nix
@@ -151,30 +152,18 @@ in
 
   systemd.user.services.warpd = {
     Unit = {
-      Description = "Modal keyboard-driven pointer control";
-      PartOf = [ "graphical-session.target" ];
-      After = [
-        "graphical-session.target"
-        "graphical-session-pre.target"
-        "window-manager.target"
-      ];
+      Description = "warpd - A modal keyboard-driven pointer manipulation program";
+      After = "graphical.target";
     };
 
     Service = {
-      ExecStart = "${pkgs.warpd}/bin/warpd";
-      
-      # Restart on failure
+      ExecStart = "${pkgs.warpd}/bin/warpd -f";
       Restart = "on-failure";
       RestartSec = 3;
-      
-      # Kill the process on session logout
-      KillMode = "process";
-
-      Type = "simple";
     };
 
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = [ "default.target" ];
     };
   };
 
